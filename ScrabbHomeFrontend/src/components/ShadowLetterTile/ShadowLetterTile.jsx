@@ -1,4 +1,3 @@
-import "./ShadowLetterTile.css";
 import "@fontsource/chivo";
 import { makeStyles } from "@mui/styles";
 import palette from "../../data/palette";

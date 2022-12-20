@@ -1,4 +1,3 @@
-import "./SpecialTile.css";
 import "@fontsource/chivo";
 import { makeStyles } from "@mui/styles";
 import classNames from "classnames";
