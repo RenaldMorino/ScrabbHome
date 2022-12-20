@@ -1,12 +1,10 @@
-import "./ScrabbleBoard.css";
 import React from "react";
 import letters from "../../data/letters";
 import LetterTile from "../LetterTile/LetterTile";
 import ShadowLetterTile from "../ShadowLetterTile/ShadowLetterTile";
 import SpecialTile from "../SpecialTile/SpecialTile";
+import { makeStyles } from "@mui/styles";
 
-const rows = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
-const columns = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
 const tileTypes = [
   ["tripleWord", "", "", "doubleLetter", "", "", "", "tripleWord", "", "", "", "doubleLetter", "", "", "tripleWord"],
   ["", "doubleWord", "", "", "", "tripleLetter", "", "", "", "tripleLetter", "", "", "", "doubleWord", ""],
@@ -28,28 +26,55 @@ const tileTypes = [
 function getTileType(row, col) {
   switch (tileTypes?.at(row).at(col)) {
     case "isCenter":
-      return <SpecialTile isCenter />;
+      return <SpecialTile isCenter key={"tile " + row + " " + col} />;
     case "tripleWord":
-      return <SpecialTile type={"tripleWord"} />;
+      return (
+        <SpecialTile type={"tripleWord"} key={"tile " + row + " " + col} />
+      );
     case "tripleLetter":
-      return <SpecialTile type={"tripleLetter"} />;
+      return (
+        <SpecialTile type={"tripleLetter"} key={"tile " + row + " " + col} />
+      );
     case "doubleWord":
-      return <SpecialTile type={"doubleWord"} />;
+      return (
+        <SpecialTile type={"doubleWord"} key={"tile " + row + " " + col} />
+      );
     case "doubleLetter":
-      return <SpecialTile type={"doubleLetter"} />;
+      return (
+        <SpecialTile type={"doubleLetter"} key={"tile " + row + " " + col} />
+      );
     default:
-      return <LetterTile letter={""} value={""} key={"empty " + row + " " + col} />;
+      return (
+        <LetterTile letter={""} value={""} key={"tile " + row + " " + col} isPlaced/>
+      );
   }
 }
 
+const useStyles = makeStyles((theme) => ({
+  board: {
+    alignItems: "center",
+    justifyContent: "left",
+    WebkitTouchCallout: "none",
+    WebkitUserSelect: "none",
+    KhtmlUserSelect: "none",
+    MozUserSelect: "none",
+    msUserSelect: "none",
+    userSelect: "none",
+  },
+  row: {
+    display: "flex",
+  }
+}));
+
 export default function ScrabbleBoard() {
+  const classes = useStyles();
   return (
-    <div className="board">
-      {rows.map((row) => {
+    <div className={classes.board}>
+      {[...Array(15)].map((row, i) => {
         return (
-          <div className="row">
-            {columns.map((col) => {
-              return getTileType(row, col);
+          <div className={classes.row} key={"row " + i}>
+            {[...Array(15)].map((col, j) => {
+              return getTileType(i, j);
             })}
           </div>
         );
