@@ -83,3 +83,11 @@
   text-align: right;
   justify-content: right;
 }
+
+.pickedUp {
+  top: "-4px";
+  left: "-4px";
+  box-shadow: "4px 4px 0px #000000";
+  transition: "box-shadow 0.1s, top 0.1s, left 0.1s";
+  cursor: grab;
+}
